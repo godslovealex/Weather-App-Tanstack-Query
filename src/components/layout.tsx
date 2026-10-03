@@ -18,20 +18,9 @@ export function Layout({ children }: PropsWithChildren) {
       {/* Footer */}
       <footer className="border-t backdrop-blur supports-[backdrop-filter]:bg-background/60 py-8">
         <div className="container mx-auto px-2 flex flex-col items-center gap-2">
-          {/* Brand Logo */}
-          <img
-            src={
-              theme === "dark"
-                ? "/tifflove_brand_logo_dark.png"
-                : "/tifflove_brand_logo_light.png"
-            }
-            alt="Brand Logo"
-            className="h-40 w-auto -mt-7 object-contain drop-shadow-lg"
-          />
-
           {/* Copyright */}
           <p
-            className={`text-sm -mt-7 ${
+            className={`text-sm ${
               theme === "dark" ? "text-gray-300" : "text-gray-800"
             }`}
           >
