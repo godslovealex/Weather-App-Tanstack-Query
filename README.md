@@ -35,8 +35,8 @@ A clean, responsive weather app that shows current conditions, hourly temperatur
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
+git clone https://github.com/godslovealex/Weather-App-Tanstack-Query.git
+cd Weather-App-Tanstack-Query
 ```
 
 ### 2. Install dependencies
