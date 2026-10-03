@@ -23,25 +23,34 @@ interface DailyForecast {
 
 export function WeatherForecast({ data }: WeatherForecastProps) {
   // Group forecast by day and get daily min/max
-  const dailyForecasts = data.list.reduce((acc, forecast) => {
-    const date = format(new Date(forecast.dt * 1000), "yyyy-MM-dd");
+  const dailyForecasts = data.list.reduce(
+    (acc, forecast) => {
+      const date = format(new Date(forecast.dt * 1000), "yyyy-MM-dd");
 
-    if (!acc[date]) {
-      acc[date] = {
-        temp_min: forecast.main.temp_min,
-        temp_max: forecast.main.temp_max,
-        humidity: forecast.main.humidity,
-        wind: forecast.wind.speed,
-        weather: forecast.weather[0],
-        date: forecast.dt,
-      };
-    } else {
-      acc[date].temp_min = Math.min(acc[date].temp_min, forecast.main.temp_min);
-      acc[date].temp_max = Math.max(acc[date].temp_max, forecast.main.temp_max);
-    }
+      if (!acc[date]) {
+        acc[date] = {
+          temp_min: forecast.main.temp_min,
+          temp_max: forecast.main.temp_max,
+          humidity: forecast.main.humidity,
+          wind: forecast.wind.speed,
+          weather: forecast.weather[0],
+          date: forecast.dt,
+        };
+      } else {
+        acc[date].temp_min = Math.min(
+          acc[date].temp_min,
+          forecast.main.temp_min,
+        );
+        acc[date].temp_max = Math.max(
+          acc[date].temp_max,
+          forecast.main.temp_max,
+        );
+      }
 
-    return acc;
-  }, {} as Record<string, DailyForecast>);
+      return acc;
+    },
+    {} as Record<string, DailyForecast>,
+  );
 
   // Get next 5 days
   const nextDays = Object.values(dailyForecasts).slice(1, 6);
@@ -59,8 +68,9 @@ export function WeatherForecast({ data }: WeatherForecastProps) {
           {nextDays.map((day) => (
             <div
               key={day.date}
-              className="grid grid-cols-3 items-center gap-4 rounded-lg border p-4"
+              className="grid gap-3 rounded-lg border p-4 sm:grid-cols-3 sm:items-center sm:gap-4"
             >
+              {/* Date + description */}
               <div>
                 <p className="font-medium">
                   {format(new Date(day.date * 1000), "EEE, MMM d")}
@@ -70,25 +80,27 @@ export function WeatherForecast({ data }: WeatherForecastProps) {
                 </p>
               </div>
 
-              <div className="flex justify-center gap-4">
+              {/* Min / max temperature */}
+              <div className="flex gap-4 sm:justify-center">
                 <span className="flex items-center text-blue-500">
-                  <ArrowDown className="mr-1 h-4 w-4" />
+                  <ArrowDown className="mr-1 h-4 w-4 shrink-0" />
                   {formatTemp(day.temp_min)}
                 </span>
                 <span className="flex items-center text-red-500">
-                  <ArrowUp className="mr-1 h-4 w-4" />
+                  <ArrowUp className="mr-1 h-4 w-4 shrink-0" />
                   {formatTemp(day.temp_max)}
                 </span>
               </div>
 
-              <div className="flex justify-end gap-4">
+              {/* Humidity + wind */}
+              <div className="flex gap-4 sm:justify-end">
                 <span className="flex items-center gap-1">
-                  <Droplets className="h-4 w-4 text-blue-500" />
+                  <Droplets className="h-4 w-4 shrink-0 text-blue-500" />
                   <span className="text-sm">{day.humidity}%</span>
                 </span>
-                <span className="flex items-center gap-1">
-                  <Wind className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm">{day.wind}m/s</span>
+                <span className="flex items-center gap-1 whitespace-nowrap">
+                  <Wind className="h-4 w-4 shrink-0 text-blue-500" />
+                  <span className="text-sm">{day.wind} m/s</span>
                 </span>
               </div>
             </div>
