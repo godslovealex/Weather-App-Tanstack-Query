@@ -22,7 +22,7 @@ export function Layout({ children }: PropsWithChildren) {
           <p
             className={`text-sm ${
               theme === "dark" ? "text-gray-300" : "text-gray-800"
-            }`}
+            }`} 
           >
             © {new Date().getFullYear()} Godslove Alex. All rights reserved.
           </p>
