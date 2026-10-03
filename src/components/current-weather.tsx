@@ -19,27 +19,25 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
 
   return (
     <Card className="overflow-hidden">
-      <CardContent className="p-6">
+      <CardContent className="p-4 sm:p-6">
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex items-center">
-                <h2 className="text-2xl font-bold tracking-tight">
-                  {locationName?.name}
-                </h2>
+            <div className="space-y-1">
+              <h2 className="text-2xl font-bold tracking-tight">
+                {locationName?.name}
                 {locationName?.state && (
-                  <span className="text-muted-foreground">
+                  <span className="text-base font-normal text-muted-foreground">
                     , {locationName.state}
                   </span>
                 )}
-              </div>
+              </h2>
               <p className="text-sm text-muted-foreground">
                 {locationName?.country}
               </p>
             </div>
 
             <div className="flex items-center gap-2">
-              <p className="text-7xl font-bold tracking-tighter">
+              <p className="text-6xl font-bold tracking-tighter sm:text-7xl">
                 {formatTemp(temp)}
               </p>
               <div className="space-y-1">
